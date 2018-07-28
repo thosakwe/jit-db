@@ -26,5 +26,21 @@ int main(int argc, const char **argv) {
 
     Server server(options);
 
+    if (!server.BindSocket(&errorMessage)) {
+        cerr << "fatal error: " << errorMessage << endl;
+        return 1;
+    }
+
+    cout << "jitdb listening at jitdb://" << options.host << ":" << options.port << endl;
+
+    while (true) {
+        sockaddr addr;
+        socklen_t len;
+        int sock = server.Accept(&addr, &len);
+        if (sock < 0) continue;
+        cout << "Hey: " << sock << endl;
+        close(sock);
+    }
+
     return 0;
 }
