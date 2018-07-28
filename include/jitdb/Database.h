@@ -7,4 +7,10 @@
 #ifndef JIT_DB_DATABASE_H
 #define JIT_DB_DATABASE_H
 
+namespace jitdb {
+    class Database {
+
+    };
+}
+
 #endif //JIT_DB_DATABASE_H

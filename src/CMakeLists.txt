@@ -1,5 +1,5 @@
 add_library(jitdb
-        frontend/Options.cpp server/Server.cpp)
+        frontend/Options.cpp server/Server.cpp database/Database.cpp)
 
 add_executable(jitdb_daemon main.cpp)
 find_package(Readline)
