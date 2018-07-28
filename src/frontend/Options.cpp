@@ -5,13 +5,13 @@
 // Use of this source code is governed by an
 // MIT-style license that can be found in the LICENSE file.
 #include <sstream>
-#include "Options.h"
+#include "jitdb/Options.h"
 
 bool jitdb::ParseOptions(jitdb::Options &options, int argc, const char **argv, const char **errorMessage) {
     for (int i = 1; i < argc; i++) {
         std::string arg(argv[i]);
 
-        if (i < argc - 2) {
+        if (i < argc - 1) {
             if (arg == "--port" || arg == "-p") {
                 std::string next(argv[++i]);
                 std::istringstream iss(next);
@@ -27,6 +27,9 @@ bool jitdb::ParseOptions(jitdb::Options &options, int argc, const char **argv, c
                 options.host = next;
                 continue;
             }
+        } else if (arg == "--help" || arg == "-h") {
+            options.printHelp = true;
+            return true;
         }
 
         std::ostringstream oss;
@@ -36,4 +39,13 @@ bool jitdb::ParseOptions(jitdb::Options &options, int argc, const char **argv, c
     }
 
     return true;
+}
+
+void jitdb::PrintHelp(std::ostream &stream) {
+    stream << "usage: jitdb [options...]" << std::endl;
+    stream << std::endl;
+    stream << "Options:" << std::endl;
+    stream << "--help, -h    Print this help information." << std::endl;
+    stream << "--host, -H    Address to listen at [127.0.0.1]" << std::endl;
+    stream << "--port, -p    Port to listen at [27018]" << std::endl;
 }
