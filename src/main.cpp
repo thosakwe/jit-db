@@ -24,7 +24,7 @@ int main(int argc, const char **argv) {
         return 0;
     }
 
-    cout << "yay" << endl;
+    Server server(options);
 
     return 0;
 }

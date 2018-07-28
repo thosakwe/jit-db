@@ -4,10 +4,12 @@
 //
 // Use of this source code is governed by an
 // MIT-style license that can be found in the LICENSE file.
-#ifndef JIT_DB_JITDB_H
-#define JIT_DB_JITDB_H
+#include <jitdb/jitdb.h>
 
-#include "Options.h"
-#include "Server.h"
+jitdb::Server::Server(const Options &options) : options(options) {
 
-#endif //JIT_DB_JITDB_H
+}
+
+jitdb::Server::~Server() {
+
+}

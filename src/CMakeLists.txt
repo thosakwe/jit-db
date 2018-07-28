@@ -1,5 +1,5 @@
 add_library(jitdb
-        frontend/Options.cpp)
+        frontend/Options.cpp server/Server.cpp)
 
 add_executable(jitdb_daemon main.cpp)
 target_link_libraries(jitdb_daemon jitdb hsql)
