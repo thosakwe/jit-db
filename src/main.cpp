@@ -6,6 +6,7 @@
 // MIT-style license that can be found in the LICENSE file.
 #include <jitdb/jitdb.h>
 #include <iostream>
+#include <readline/readline.h>
 
 using namespace jitdb;
 using namespace std;
@@ -24,22 +25,34 @@ int main(int argc, const char **argv) {
         return 0;
     }
 
-    Server server(options);
+    if (options.repl) {
+        const char *buf;
 
-    if (!server.BindSocket(&errorMessage)) {
-        cerr << "fatal error: " << errorMessage << endl;
-        return 1;
-    }
+        while ((buf = readline("jitdb> ")) != nullptr) {
+            std::string line(buf);
+            if (line.empty())continue;
+            add_history(buf);
+            cout << "REPL: " << line << endl;
+        }
+    } else {
 
-    cout << "jitdb listening at jitdb://" << options.host << ":" << options.port << endl;
+        Server server(options);
 
-    while (true) {
-        sockaddr addr;
-        socklen_t len;
-        int sock = server.Accept(&addr, &len);
-        if (sock < 0) continue;
-        cout << "Hey: " << sock << endl;
-        close(sock);
+        if (!server.BindSocket(&errorMessage)) {
+            cerr << "fatal error: " << errorMessage << endl;
+            return 1;
+        }
+
+        cout << "jitdb listening at jitdb://" << options.host << ":" << options.port << endl;
+
+        while (true) {
+            sockaddr addr;
+            socklen_t len;
+            int sock = server.Accept(&addr, &len);
+            if (sock < 0) continue;
+            cout << "Hey: " << sock << endl;
+            close(sock);
+        }
     }
 
     return 0;

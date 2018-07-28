@@ -3,6 +3,7 @@ project(jit_db CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 include_directories(include)
 include_directories(third_party/sql-parser/src)
 
