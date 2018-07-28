@@ -3,7 +3,7 @@ project(jit_db CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 
-include_directories(lib/sql-parser/src)
+include_directories(third_party/sql-parser/src)
 
-add_subdirectory(lib)
+add_subdirectory(third_party)
 add_subdirectory(src)
