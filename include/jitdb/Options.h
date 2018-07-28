@@ -17,6 +17,7 @@ namespace jitdb
         std::string host = std::string("127.0.0.1");
         int port = 27018;
         bool printHelp = false;
+        bool repl = false;
     };
 
     bool ParseOptions(jitdb::Options &options, int argc, const char **argv, const char **errorMessage);

@@ -30,6 +30,9 @@ bool jitdb::ParseOptions(jitdb::Options &options, int argc, const char **argv, c
         } else if (arg == "--help" || arg == "-h") {
             options.printHelp = true;
             return true;
+        } else if (arg == "--repl" || arg == "-x") {
+            options.repl = true;
+            return true;
         }
 
         std::ostringstream oss;
@@ -48,4 +51,5 @@ void jitdb::PrintHelp(std::ostream &stream) {
     stream << "--help, -h    Print this help information." << std::endl;
     stream << "--host, -H    Address to listen at [127.0.0.1]" << std::endl;
     stream << "--port, -p    Port to listen at [27018]" << std::endl;
+    stream << "--repl, -x    Start a REPL" << std::endl;
 }
