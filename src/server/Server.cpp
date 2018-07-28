@@ -11,5 +11,14 @@ jitdb::Server::Server(const Options &options) : options(options) {
 }
 
 jitdb::Server::~Server() {
+    close(sockfd);
+}
 
+int jitdb::Server::Accept(sockaddr *addr, socklen_t *socklen) {
+    std::lock_guard(socketMutex);
+    return accept(sockfd, addr, socklen);
+}
+
+bool jitdb::Server::BindSocket(const char **errorMessage) {
+    return false;
 }
