@@ -11,6 +11,7 @@
 #include "database/Database.h"
 #include "server/Server.h"
 
+using namespace hsql;
 using namespace jitdb;
 using namespace std;
 
@@ -35,13 +36,36 @@ int main(int argc, const char **argv) {
     test.SetTable("todos", todos);
     environment.AddDatabase("test", test);
 
+    Compiler compiler(environment);
+
+    options.repl = true; // TODO: Actually support network protocol
+
     if (options.repl) {
         const char *buf;
 
         while ((buf = readline("jitdb> ")) != nullptr) {
             std::string line(buf);
-            if (line.empty())continue;
+            if (line.empty()) continue;
             add_history(buf);
+
+            SQLParserResult result;
+            SQLParser::parse(line, &result);
+
+            if (!result.isValid()) {
+                cout << "sql error at line " << result.errorLine() << ", column " << result.errorColumn() << ": "
+                     << result.errorMsg() << endl;
+            } else {
+                for (int i = 0; i < result.getStatements().size(); i++) {
+                    auto *statement = result.getStatement(i);
+                    const char *errorMessage;
+
+                    if (!compiler.Execute(statement, &errorMessage)) {
+                        cout << "error: " << errorMessage << endl;
+                    } else {
+                        // TODO: Print the rows.
+                    }
+                }
+            }
         }
     } else {
 
