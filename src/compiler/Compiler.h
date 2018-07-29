@@ -35,13 +35,22 @@ namespace jitdb
 
         struct SelectContinuation
         {
-            jit_function_t function;
+            const hsql::SelectStatement *statement;
+            const char **errorMessage;
+            bool errored = false;
+            jit_function_t entryPoint;
             jit_value_t dataPointer;
             jit_value_t currentReturnValue;
             jit_value_t currentLength;
         };
 
         bool ExecuteSelect(const hsql::SelectStatement *statement, const char **errorMessage);
+
+        jit_function_t CompileSelectPredicate(SelectContinuation &continuation);
+
+        jit_value_t
+        CompilePredicateExpression(hsql::Expr *expr, SelectContinuation &function, jit_function_t param,
+                                   jit_value_t pValue);
     };
 }
 
