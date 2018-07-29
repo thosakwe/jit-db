@@ -4,9 +4,11 @@
 //
 // Use of this source code is governed by an
 // MIT-style license that can be found in the LICENSE file.
-#include <jitdb/jitdb.h>
 #include <iostream>
+#include <jitdb/jitdb_socket.h>
 #include <readline/readline.h>
+#include "database/Database.h"
+#include "server/Server.h"
 
 using namespace jitdb;
 using namespace std;

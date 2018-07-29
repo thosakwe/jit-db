@@ -12,21 +12,13 @@ namespace jitdb
     class Type
     {
     public:
-        Type(const unsigned long size) : size(size) {
+        Type(const unsigned long size);
 
-        }
+        Type(const Type &other);
 
-        Type(const Type &other) : size(other.size) {
+        Type(const Type &&other);
 
-        }
-
-        Type(const Type &&other) : size(other.size) {
-
-        }
-
-        const unsigned long GetSize() const {
-            return size;
-        }
+        const unsigned long GetSize() const;
 
     private:
         const unsigned long size;

@@ -7,26 +7,9 @@
 #ifndef JIT_DB_SERVER_H
 #define JIT_DB_SERVER_H
 
-#ifndef WIN32
-
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-
-#else
-#include <windows.h>
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#include <sstream>
-// Need to link with Ws2_32.lib, Mswsock.lib, and Advapi32.lib
-#pragma comment(lib, "Ws2_32.lib")
-#pragma comment(lib, "Mswsock.lib")
-#pragma comment(lib, "AdvApi32.lib")
-#endif
-
+#include <jitdb/jitdb_socket.h>
 #include <mutex>
-#include "Options.h"
+#include "../frontend/Options.h"
 
 namespace jitdb
 {

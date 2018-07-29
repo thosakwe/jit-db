@@ -5,7 +5,7 @@
 // Use of this source code is governed by an
 // MIT-style license that can be found in the LICENSE file.
 #include <sstream>
-#include "jitdb/Options.h"
+#include "Options.h"
 
 bool jitdb::ParseOptions(jitdb::Options &options, int argc, const char **argv, const char **errorMessage) {
     for (int i = 1; i < argc; i++) {
