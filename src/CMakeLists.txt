@@ -8,9 +8,11 @@ add_executable(jitdb_daemon
         frontend/Options.h frontend/Options.cpp
         server/Server.h server/Server.cpp database/Table.cpp compiler/Compiler.cpp compiler/Compiler.h)
 
+find_path(LIBJIT_INCLUDE_DIR jit/jit.h)
+find_library(LIBJIT jit)
 find_package(Readline)
-target_include_directories(jitdb_daemon PUBLIC ${Readline_INCLUDE_DIR})
-target_link_libraries(jitdb_daemon hsql ${Readline_LIBRARY})
+target_include_directories(jitdb_daemon PUBLIC ${LIBJIT_INCLUDE_DIR} ${Readline_INCLUDE_DIR})
+target_link_libraries(jitdb_daemon hsql ${LIBJIT} ${Readline_LIBRARY})
 set_target_properties(jitdb_daemon PROPERTIES OUTPUT_NAME "jitdb")
 
 install(TARGETS jitdb_daemon

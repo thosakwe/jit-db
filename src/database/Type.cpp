@@ -6,16 +6,16 @@
 // MIT-style license that can be found in the LICENSE file.
 #include "Type.h"
 
-jitdb::Type::Type(const std::string& name, const unsigned long size) : name(name), size(size) {
-
+jitdb::Type::Type(const std::string &name, const unsigned long size) : size(size) {
+    this->name += name;
 }
 
-jitdb::Type::Type(const Type &other) : name(other.name), size(other.size) {
-
+jitdb::Type::Type(const Type &other) : size(other.size) {
+    this->name += other.name;
 }
 
-jitdb::Type::Type(const Type &&other) : name(other.name), size(other.size) {
-
+jitdb::Type::Type(const Type &&other) : size(other.size) {
+    this->name += other.name;
 }
 
 const std::string &jitdb::Type::GetName() const {

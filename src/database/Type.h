@@ -25,7 +25,7 @@ namespace jitdb
         const unsigned long GetSize() const;
 
     private:
-        std::string &name;
+        std::string name;
         const unsigned long size;
     };
 }
