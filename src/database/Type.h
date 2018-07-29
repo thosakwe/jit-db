@@ -7,20 +7,25 @@
 #ifndef JIT_DB_TYPE_H
 #define JIT_DB_TYPE_H
 
+#include <string>
+
 namespace jitdb
 {
     class Type
     {
     public:
-        Type(const unsigned long size);
+        Type(const std::string &name, unsigned long size);
 
         Type(const Type &other);
 
         Type(const Type &&other);
 
+        const std::string &GetName() const;
+
         const unsigned long GetSize() const;
 
     private:
+        std::string &name;
         const unsigned long size;
     };
 }

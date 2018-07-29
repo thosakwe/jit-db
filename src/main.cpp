@@ -7,6 +7,7 @@
 #include <iostream>
 #include <jitdb/jitdb_socket.h>
 #include <readline/readline.h>
+#include "compiler/Compiler.h"
 #include "database/Database.h"
 #include "server/Server.h"
 
@@ -27,6 +28,13 @@ int main(int argc, const char **argv) {
         return 0;
     }
 
+    Environment environment;
+    Database test;
+    Table todos;
+    todos.GetSchema().SetField("num", Type("Int32", 4));
+    test.SetTable("todos", todos);
+    environment.AddDatabase("test", test);
+
     if (options.repl) {
         const char *buf;
 
@@ -34,7 +42,6 @@ int main(int argc, const char **argv) {
             std::string line(buf);
             if (line.empty())continue;
             add_history(buf);
-            cout << "REPL: " << line << endl;
         }
     } else {
 

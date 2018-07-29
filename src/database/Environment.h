@@ -16,6 +16,8 @@ namespace jitdb
     class Environment
     {
     public:
+        Environment() = default;
+
         Environment(const Environment &environment) = delete;
 
         Environment(const Environment &&environment) = delete;

@@ -6,7 +6,7 @@ add_executable(jitdb_daemon
         database/Table.cpp database/Table.h
         database/Type.cpp database/Type.h
         frontend/Options.h frontend/Options.cpp
-        server/Server.h server/Server.cpp database/Table.cpp)
+        server/Server.h server/Server.cpp database/Table.cpp compiler/Compiler.cpp compiler/Compiler.h)
 
 find_package(Readline)
 target_include_directories(jitdb_daemon PUBLIC ${Readline_INCLUDE_DIR})
