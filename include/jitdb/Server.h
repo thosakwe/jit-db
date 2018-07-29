@@ -33,7 +33,7 @@ namespace jitdb
     class Server
     {
     public:
-        explicit Server(const Options &options);
+        Server(const Options &options);
 
         ~Server();
 

@@ -1,7 +1,7 @@
 add_library(jitdb
         frontend/Options.cpp server/Server.cpp database/Database.cpp)
 
-add_executable(jitdb_daemon main.cpp)
+add_executable(jitdb_daemon main.cpp ../include/jitdb/Type.h)
 find_package(Readline)
 target_include_directories(jitdb_daemon PUBLIC ${Readline_INCLUDE_DIR})
 target_link_libraries(jitdb_daemon jitdb hsql ${Readline_LIBRARY})
