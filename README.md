@@ -8,5 +8,5 @@ CMake is the build system of choice for this project; please use it.
 To start the server, run:
 
 ```bash
-jitdb --port 27018
+pubby --port 27018
 ```

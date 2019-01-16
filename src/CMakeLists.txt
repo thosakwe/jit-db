@@ -1,20 +1,15 @@
-add_executable(jitdb_daemon
+add_executable(pubbyd
+        ../third_party/http-parser-master/http_parser.c
         main.cpp
-        database/Environment.cpp database/Environment.h
-        database/Database.cpp database/Database.h
-        database/Schema.cpp database/Schema.h
-        database/Table.cpp database/Table.h
-        database/Type.cpp database/Type.h
-        frontend/Options.h frontend/Options.cpp
-        server/Server.h server/Server.cpp database/Table.cpp compiler/Compiler.cpp compiler/Compiler.h)
+        frontend/options.h frontend/options.cc
+        database/environment.cc database/environment.h frontend/server.cc frontend/server.h)
 
 find_path(LIBJIT_INCLUDE_DIR jit/jit.h)
 find_library(LIBJIT jit)
 find_package(Readline)
-target_include_directories(jitdb_daemon PUBLIC ${LIBJIT_INCLUDE_DIR} ${Readline_INCLUDE_DIR})
-target_link_libraries(jitdb_daemon hsql ${LIBJIT} ${Readline_LIBRARY})
-set_target_properties(jitdb_daemon PROPERTIES OUTPUT_NAME "jitdb")
+target_include_directories(pubbyd PUBLIC ${LIBJIT_INCLUDE_DIR} ${Readline_INCLUDE_DIR})
+target_link_libraries(pubbyd hsql ${LIBJIT} ${Readline_LIBRARY})
 
-install(TARGETS jitdb_daemon
+install(TARGETS pubbyd
         ARCHIVE DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/lib
         RUNTIME DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bin)
