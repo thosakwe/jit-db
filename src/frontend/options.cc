@@ -9,6 +9,7 @@
 #include "options.h"
 
 void pubby::parse_options(pubby::options &options, int argc, const char **argv) {
+    // TODO: Safer reading of "next" arg
     for (int i = 1; i < argc; i++) {
         std::string arg(argv[i]);
 
